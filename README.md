@@ -16,28 +16,28 @@ A simple script that uses [yt-dlp](https://github.com/yt-dlp/yt-dlp) to download
 You can download the latest `yt-dlp` release directly from GitHub:
 
 ```
-sudo curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp
-sudo chmod +x /usr/local/bin/yt-dlp
+sudo curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o ~/.local/bin/yt-dlp
+sudo chmod +x ~/.local/bin/yt-dlp
 ```
 
-> Make sure `/usr/local/bin` is in your `PATH` (see next section).
+> Make sure `~/.local/bin` is in your `PATH` (see next section).
 
 ---
 
 ### 2. Check Your PATH
 
-To see if `/usr/local/bin` is in your `PATH`, run:
+To see if `~/.local/bin` is in your `PATH`, run:
 
 ```
-echo $PATH
+echo $PATH | grep ~/.local/bin
 ```
 
-If you see `/usr/local/bin` listed (colon-separated), you’re good.  
+If you see `~/.local/bin` listed (colon-separated), you’re good.  
 
 If not, add it temporarily with:
 
 ```
-export PATH=$PATH:/usr/local/bin
+export PATH=$PATH:~/.local/bin
 ```
 
 To make it permanent, add that line to your shell config file:
@@ -48,7 +48,7 @@ To make it permanent, add that line to your shell config file:
 Example:
 
 ```
-echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
+echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -87,7 +87,7 @@ Add the following:
 1. Move `songsdl.py` to a location in your PATH, for example:
 
 ```
-sudo mv songsdl.py /usr/local/bin/songsdl
+sudo mv songsdl.py ~/.local/bin/songsdl
 ```
 
 > Make sure to **remove the `.py` extension** so it can be called as `songsdl`.
@@ -95,7 +95,7 @@ sudo mv songsdl.py /usr/local/bin/songsdl
 2. Make it executable:
 
 ```
-sudo chmod +x /usr/local/bin/songsdl
+sudo chmod +x ~/.local/bin/songsdl
 ```
 
 3. Run `songsdl` with the following options:
