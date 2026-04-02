@@ -16,8 +16,8 @@ A simple script that uses [yt-dlp](https://github.com/yt-dlp/yt-dlp) to download
 You can download the latest `yt-dlp` release directly from GitHub:
 
 ```
-sudo curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o ~/.local/bin/yt-dlp
-sudo chmod +x ~/.local/bin/yt-dlp
+curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o ~/.local/bin/yt-dlp
+chmod +x ~/.local/bin/yt-dlp
 ```
 
 > Make sure `~/.local/bin` is in your `PATH` (see next section).
