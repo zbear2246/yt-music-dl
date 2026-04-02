@@ -16,28 +16,28 @@ A simple script that uses [yt-dlp](https://github.com/yt-dlp/yt-dlp) to download
 You can download the latest `yt-dlp` release directly from GitHub:
 
 ```
-curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/.local/bin/yt-dlp
-chmod +x /usr/.local/bin/yt-dlp
+curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp
+chmod +x /usr/local/bin/yt-dlp
 ```
 
-> Make sure `/usr/.local/bin` is in your `PATH` (see next section).
+> Make sure `/usr/local/bin` is in your `PATH` (see next section).
 
 ---
 
 ### 2. Check Your PATH
 
-To see if `/usr/.local/bin` is in your `PATH`, run:
+To see if `/usr/local/bin` is in your `PATH`, run:
 
 ```
 echo $PATH
 ```
 
-If you see `/usr/.local/bin` listed (colon-separated), you’re good.  
+If you see `/usr/local/bin` listed (colon-separated), you’re good.  
 
 If not, add it temporarily with:
 
 ```
-export PATH=$PATH:/usr/.local/bin
+export PATH=$PATH:/usr/local/bin
 ```
 
 To make it permanent, add that line to your shell config file:
@@ -48,7 +48,7 @@ To make it permanent, add that line to your shell config file:
 Example:
 
 ```
-echo 'export PATH=$PATH:/usr/.local/bin' >> ~/.bashrc
+echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
