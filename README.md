@@ -44,6 +44,8 @@ Node is used by yt-dlp to solve YouTube's JS challenges, which helps avoid downl
 sudo apt install nodejs
 ```
 
+> Side Note: Keep yt-dlp updated using `yt-dlp -U` because youtube tends to break it often
+
 ---
 
 ### 4. Configure yt-dlp
