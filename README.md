@@ -52,7 +52,7 @@ sudo apt install nodejs
 
 Create the config directory:
 ```
-mkdir ~/.config/yt-dlp
+mkdir -p ~/.config/yt-dlp
 ```
 
 Open or create `~/.config/yt-dlp/config` and paste this in:
