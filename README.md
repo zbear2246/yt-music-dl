@@ -5,6 +5,7 @@ A simple script that uses [yt-dlp](https://github.com/yt-dlp/yt-dlp) to download
 ## Requirements
 
 - `yt-dlp`
+- `ffmpeg` (for converting audio to MP3)
 - `node` (for yt-dlp's JS challenge solver)
 - `Python 3` (to run `songsdl.py`)
 
@@ -37,18 +38,25 @@ source ~/.bashrc
 
 ---
 
-### 3. Install Node.js
+### 3. Install ffmpeg
+
+ffmpeg is what yt-dlp uses under the hood to convert downloaded audio into MP3. Install it with:
+```
+sudo apt install ffmpeg
+```
+
+---
+
+### 4. Install Node.js
 
 Node is used by yt-dlp to solve YouTube's JS challenges, which helps avoid download failures. Install it with:
 ```
 sudo apt install nodejs
 ```
 
-> Side Note: Keep yt-dlp updated using `yt-dlp -U` because youtube tends to break it often
-
 ---
 
-### 4. Configure yt-dlp
+### 5. Configure yt-dlp
 
 Create the config directory:
 ```
@@ -145,6 +153,17 @@ yt-dlp will search YouTube for each line automatically. Using the `ARTIST - SONG
 - Embeds metadata into files
 - Cleans up leftover files
 - Trims long filenames
+
+---
+
+## Updating yt-dlp
+
+If downloads start failing, the first thing to try is updating yt-dlp:
+```
+yt-dlp -U
+```
+
+YouTube breaks yt-dlp fairly often, and keeping it updated fixes most issues.
 
 ---
 
