@@ -1,20 +1,18 @@
 # yt-music-dl
 
-A simple script that uses [yt-dlp](https://github.com/yt-dlp/yt-dlp) to download songs as audio files.
+A simple script that uses [yt-dlp](https://github.com/yt-dlp/yt-dlp) to download songs as audio files by searching YouTube automatically — no URLs needed.
 
 ## Requirements
 
 - `yt-dlp`
-- `node` (for JS runtime support)
-- `curl` (for downloading yt-dlp)
+- `node` (for yt-dlp's JS challenge solver)
 - `Python 3` (to run `songsdl.py`)
 
 ## Setup
 
 ### 1. Install yt-dlp
 
-You can download the latest `yt-dlp` release directly from GitHub:
-
+Download the latest `yt-dlp` release directly from GitHub:
 ```
 curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o ~/.local/bin/yt-dlp
 chmod +x ~/.local/bin/yt-dlp
@@ -27,26 +25,11 @@ chmod +x ~/.local/bin/yt-dlp
 ### 2. Check Your PATH
 
 To see if `~/.local/bin` is in your `PATH`, run:
-
 ```
 echo $PATH | grep ~/.local/bin
 ```
 
-If you see `~/.local/bin` listed (colon-separated), you’re good.  
-
-If not, add it temporarily with:
-
-```
-export PATH=$PATH:~/.local/bin
-```
-
-To make it permanent, add that line to your shell config file:
-
-- For **bash**: `~/.bashrc`  
-- For **zsh**: `~/.zshrc`  
-
-Example:
-
+If you see `~/.local/bin` listed, you're good. If not, add it permanently:
 ```
 echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
 source ~/.bashrc
@@ -54,16 +37,23 @@ source ~/.bashrc
 
 ---
 
-### 3. Configure yt-dlp
+### 3. Install Node.js
 
-Create or edit the config file:
-
+Node is used by yt-dlp to solve YouTube's JS challenges, which helps avoid download failures. Install it with:
 ```
-~/.config/yt-dlp/config
+sudo apt install nodejs
 ```
 
-Add the following:
+---
 
+### 4. Configure yt-dlp
+
+Create the config directory:
+```
+mkdir ~/.config/yt-dlp
+```
+
+Open or create `~/.config/yt-dlp/config` and paste this in:
 ```
 --js-runtimes node
 -x
@@ -82,30 +72,28 @@ Add the following:
 
 ---
 
+## Download songsdl
+
+Clone the repo and move the script to your PATH:
+```
+git clone https://github.com/zbear2246/yt-music-dl.git
+cd yt-music-dl
+mv songsdl.py ~/.local/bin/songsdl
+chmod +x ~/.local/bin/songsdl
+```
+
+Remove the `.py` extension so it can be called as just `songsdl`.
+
+---
+
 ## How to Run `songsdl`
 
-1. Move `songsdl.py` to a location in your PATH, for example:
-
-```
-sudo mv songsdl.py ~/.local/bin/songsdl
-```
-
-> Make sure to **remove the `.py` extension** so it can be called as `songsdl`.
-
-2. Make it executable:
-
-```
-sudo chmod +x ~/.local/bin/songsdl
-```
-
-3. Run `songsdl` with the following options:
-
+Run `songsdl` with the following options:
 ```
 songsdl -h
 ```
 
 You should see:
-
 ```
 usage: songsdl [-h] -i INPUT -o OUTPUT
 
@@ -117,21 +105,40 @@ options:
   -o, --output OUTPUT  The full/absolute path to the desired download path
 ```
 
-- `-i` / `--input` → full path to a text file containing song URLs.  
+- `-i` / `--input` → full path to a plain text file containing your song list.
 - `-o` / `--output` → full path to the folder where you want the songs downloaded.
 
-Example usage:
+Example:
+```
+songsdl -i /home/user/songlist.txt -o /home/user/Music/
+```
 
+Make sure your output path ends with a `/` so files are saved correctly inside the folder.
+
+---
+
+## Song List Format
+
+Your input file should be a plain text file with one song per line, written as:
 ```
-songsdl -i /home/user/songlist.txt -o /home/user/Music
+ARTIST - SONG NAME
 ```
+
+Example:
+```
+Iron Maiden - The Trooper
+Queen - Bohemian Rhapsody
+Metallica - Master of Puppets
+```
+
+yt-dlp will search YouTube for each line automatically. Using the `ARTIST - SONG NAME` format gives the best results.
 
 ---
 
 ## What This Does
 
-- Extracts audio only (`-x`)
-- Converts to high-quality MP3
+- Searches YouTube automatically — no URLs needed
+- Extracts audio only and converts to high-quality MP3
 - Skips videos longer than 10 minutes
 - Embeds metadata into files
 - Cleans up leftover files
@@ -141,13 +148,8 @@ songsdl -i /home/user/songlist.txt -o /home/user/Music
 
 ## Caveats / Limitations
 
-- This script is not perfect—if `yt-dlp` cannot find a song, it will simply skip it.  
-- Some videos may not be available or extractable depending on the source.  
-
----
-
-## Notes
-
-- Designed for quick music downloads
-- Keeps things simple with a global config
-- More features may be added later
+- If yt-dlp cannot find a song, it will simply skip it.
+- Some videos may not be available or extractable depending on the source.
+- YouTube actively works to block downloaders, so downloads may occasionally fail even on an up-to-date install. Keeping yt-dlp updated helps.
+- YouTube may rate-limit or block requests if you download a large number of songs back to back.
+- Some regions may have restricted access to certain videos due to geographic limitations.
